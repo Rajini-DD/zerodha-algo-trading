@@ -33,5 +33,5 @@ These are few things from the top of my mind, and the list is ever-growing!!
 Yes, we follow TDD, or at least we expect reasonable coverage on the code that we write 
 We have CI setup with github actions, and the code health is tracked on it.
    
-> We welcome all sort of contributions, including your time and money!!
+> We welcome all sort of contributions, including your time and money!!!
 
