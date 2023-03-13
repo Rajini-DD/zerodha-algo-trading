@@ -53,7 +53,7 @@ public class ProductionHandler {
     Instrument tradingIdentity = instrumentRepository
         .findByTradingsymbolAndExchangeIn(instrumentName, exchanges);
     Map<Instrument, BarSeries> barSeriesMap = instrumentDataLoader.loadHybridData(tradingIdentity,
-        "15minute");
+        "5minute");
 
     StrategyConfig config = getStrategyConfig(instrumentName,
         strategyBuilder, StrategyEnvironment.PROD);

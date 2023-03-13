@@ -85,13 +85,13 @@ public class DataFetchService {
       LocalDateTime startDate) {
     List<Instrument> instruments = instrumentRepository
         .findAllByTradingsymbolStartingWithAndExpiryBetweenAndExchangeIn(
-            instrumentName, LocalDateTime.now().plusDays(60), startDate, exchanges);
+            instrumentName, startDate, LocalDateTime.now().plusDays(60),  exchanges);
     List<Instrument> primaryInstruments = instrumentRepository
         .findAllByTradingsymbolStartingWithAndExpiryIsNullAndExchangeIn(
             instrumentName, exchanges);
     instruments.addAll(primaryInstruments);
     instruments.addAll(primaryInstruments);
-    return primaryInstruments;
+    return instruments;
   }
 
   public void downloadData(Instrument instrument, String interval) {

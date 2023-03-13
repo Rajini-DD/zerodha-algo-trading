@@ -102,7 +102,7 @@ public class BackTestingHandler {
 //        .netPrice(order.getNetPrice().doubleValue())
 //        .pricePerAsset(order.getPricePerAsset().doubleValue())
 //        .type(order.getType())
-//        .dateTime(barSeries.getBar(order.getIndex()).getEndTime())
+ //       .dateTime(barSeries.getBar(order.getIndex()).getEndTime())
 //        .build();
 //  }
 
@@ -114,9 +114,9 @@ public class BackTestingHandler {
     backtestresultsMap.put("AverageProfit",
             calculateCriterion(new AverageProfitCriterion(), series, tradingRecord));
     backtestresultsMap.put("BuyAndHold",
-            calculateCriterion(new BuyAndHoldReturnCriterion(), series, tradingRecord));
+           calculateCriterion(new BuyAndHoldReturnCriterion(), series, tradingRecord));
     backtestresultsMap.put("LinearTransactionCost",
-            calculateCriterion(new LinearTransactionCostCriterion(5000, 0.005), series, tradingRecord));
+            calculateCriterion(new LinearTransactionCostCriterion(50000, 0.005), series, tradingRecord));
     backtestresultsMap.put("MaximumDrawdown",
             calculateCriterion(new MaximumDrawdownCriterion(), series, tradingRecord));
     backtestresultsMap.put("NumberOfBars",

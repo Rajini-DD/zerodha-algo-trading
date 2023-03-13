@@ -5,6 +5,7 @@ import com.dtech.kitecon.data.BaseCandle;
 import com.dtech.kitecon.data.Instrument;
 import com.dtech.kitecon.service.CandleFacade;
 import com.dtech.kitecon.service.DateRange;
+import com.zerodhatech.kiteconnect.KiteConnect;
 import com.zerodhatech.kiteconnect.kitehttp.exceptions.KiteException;
 import com.zerodhatech.models.HistoricalData;
 import com.zerodhatech.models.Profile;
@@ -53,11 +54,13 @@ public class ZerodhaDataFetch implements MarketDataFetch{
       ZonedDateTime now = ZonedDateTime.now();
       ZonedDateTime startDate = now.toLocalDate().atStartOfDay(now.getZone());
       ZonedDateTime endDate = now;
-      HistoricalData candles = kiteConnectConfig.getKiteConnect().getHistoricalData(Date.from(
-          startDate.toInstant()),
-          Date.from(endDate.toInstant()),
-          String.valueOf(instrument.getInstrumentToken()),
-          interval, false, true);
+
+      Date startdate = Date.from(startDate.toInstant());
+      Date enddate = Date.from(endDate.toInstant());
+      String Sinstrument =  String.valueOf(instrument.getInstrumentToken());
+      KiteConnect kc = kiteConnectConfig.getKiteConnect();
+      HistoricalData candles = kc
+              .getHistoricalData(startdate, enddate, Sinstrument, interval, false, true);
       List<BaseCandle> baseCandles = candleFacade
           .buildCandlesFromOLSHStream(interval, dateFormat, instrument, candles);
       return baseCandles;

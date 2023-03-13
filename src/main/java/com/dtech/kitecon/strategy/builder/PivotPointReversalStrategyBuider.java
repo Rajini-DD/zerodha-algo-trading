@@ -35,7 +35,7 @@ public class PivotPointReversalStrategyBuider extends BaseStrategyBuilder {
     ClosePriceIndicator closePrice = new ClosePriceIndicator(series);
     OpenPriceIndicator openPriceIndicator1 = new OpenPriceIndicator(series);
     LowestValueIndicator lowestPrice = new LowestValueIndicator(new ClosePriceIndicator(series),
-        10);
+        5);
     PivotPointIndicator pivotPoints = new PivotPointIndicator(series, TimeLevel.BARBASED);
     StandardReversalIndicator reversalIndicator = new StandardReversalIndicator(pivotPoints,
         PivotLevel.SUPPORT_1);
@@ -53,12 +53,12 @@ public class PivotPointReversalStrategyBuider extends BaseStrategyBuilder {
         .and(new OverIndicatorRule(openPriceIndicator1, reversalIndicator))
         .and(new OverIndicatorRule(openPriceIndicator1, tenSMA))
         .and(new OverIndicatorRule(voluemSma10, voluemSma50))
-        .and(new UnderIndicatorRule(new RSIIndicator(closePrice, 14), 55))
-        .and(new OverIndicatorRule(new RSIIndicator(closePrice, 14), 30))
+        .and(new UnderIndicatorRule(new RSIIndicator(closePrice, 14), 70))
+        .and(new OverIndicatorRule(new RSIIndicator(closePrice, 14), 40))
         .and(new UnderIndicatorRule(closePrice, fiftySMA1));
 
-    Rule exitRule = new StopGainRule(closePrice, 5)
-        .or(new StopLossRule(closePrice, 2))
+    Rule exitRule = new StopGainRule(closePrice, 500)
+        .or(new StopLossRule(closePrice, 500))
         .or(new TrailingStopLossRule(closePrice, DecimalNum.valueOf(1)));
 
     return new BaseStrategy(
@@ -84,16 +84,16 @@ public class PivotPointReversalStrategyBuider extends BaseStrategyBuilder {
         .and(new UnderIndicatorRule(openPriceIndicator1, reversalIndicator))
         .and(new OverIndicatorRule(closePrice, fiftySMA1));
 
-    Rule exitRule = new StopGainRule(closePrice, -2.5)
-        .or(new StopLossRule(closePrice, -0.7))
-        .or(new TrailingStopLossRule(closePrice, DecimalNum.valueOf(1)));
+    Rule exitRule = new StopGainRule(closePrice, 400)
+        .or(new StopLossRule(closePrice, -1.5))
+       .or(new TrailingStopLossRule(closePrice, DecimalNum.valueOf(1)));
 
     return new BaseStrategy(entryRule, exitRule);
   }
 
   @Override
   public TradeDirection getTradeDirection() {
-    return TradeDirection.Both;
+    return TradeDirection.Buy;
   }
 
   @Override

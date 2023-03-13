@@ -54,9 +54,11 @@ public abstract class BarsLoader {
 
   public BarSeries loadInstrumentSeries(Instrument instrument, String interval)
       throws DataFetchException {
+      System.out.println("time it is considering is :" + ZonedDateTime.now().minusDays(1).toLocalDate().atStartOfDay(ZonedDateTime.now().getZone()));
+    return loadInstrumentSeries(instrument, ZonedDateTime.now().minusDays(1).toLocalDate().atStartOfDay(ZonedDateTime.now().getZone()), interval);
 
-    return loadInstrumentSeries(instrument, null, interval);
   }
+
 
   protected BarSeries getBarSeries(Instrument instrument, List<? extends BaseCandle> candles) {
     candles.sort(Comparator.comparing(BaseCandle::getTimestamp));
@@ -83,7 +85,7 @@ public abstract class BarsLoader {
       throws DataFetchException {
 
     List<? extends BaseCandle> candles = candleRepository
-        .findAllByInstrument(interval, instrument);
+        .findAllByInstrumentAndTimestampBetween(interval, instrument, startDate.toLocalDateTime(), ZonedDateTime.now().toLocalDateTime());
     return getBarSeries(instrument, candles);
   }
 

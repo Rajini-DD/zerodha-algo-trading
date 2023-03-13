@@ -42,7 +42,8 @@ public class OpeningRangeBreakoutStrategyBuiderModified extends BaseStrategyBuil
             .and(new OverIndicatorRule(ema5, entry)),
         new CrossedDownIndicatorRule(close, exit)
             .or(new TrailingStopLossRule(close, DecimalNum.valueOf(1)))
-            .or(new StopGainRule(close, 5))
+                .or(new StopGainRule(close, close.numOf(5)))
+            //.or(new StopGainRule(close, 5))
             .or(new IsEqualRule(close, last))
     );
   }
@@ -62,7 +63,8 @@ public class OpeningRangeBreakoutStrategyBuiderModified extends BaseStrategyBuil
             .and(new UnderIndicatorRule(ema5, entry)),
         new CrossedUpIndicatorRule(close, exit)
             .or(new TrailingStopLossRule(close, DecimalNum.valueOf(1)))
-            .or(new StopGainRule(close, 5))
+                .or(new StopGainRule(close, close.numOf(5)))
+            //.or(new StopGainRule(close, 5))
             .or(new IsEqualRule(close, last))
     );
   }
@@ -83,7 +85,7 @@ public class OpeningRangeBreakoutStrategyBuiderModified extends BaseStrategyBuil
 
   @Override
   public TradeDirection getTradeDirection() {
-    return TradeDirection.Both;
+    return TradeDirection.Buy;
   }
 
   @Override

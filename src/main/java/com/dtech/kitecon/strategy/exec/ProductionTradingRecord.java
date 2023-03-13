@@ -47,6 +47,12 @@ public class ProductionTradingRecord extends BaseTradingRecord implements AlgoTr
   @Override
   public void updateOrderStatus() throws OrderException {
     this.actualQuantity = ordermanager.getActualOrderStatus(orderId);
+
+
   }
 
+  @Override
+  public String toString() {
+    return instrument.getTradingsymbol();
+  }
 }

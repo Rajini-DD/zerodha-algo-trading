@@ -14,15 +14,15 @@ public class ProductionSeriesManager {
   public TradingRecord run(BarSeries barSeries, Strategy strategy,
       TradingRecord tradingRecord, Integer quantity) {
     int index = barSeries.getEndIndex();
-    log.trace("Running strategy (indexes: {} -> {}): {} (starting with {})",
-        index, index, strategy,
+    log.info("Running strategy (indexes: {} -> {}): {} (starting with {})",
+        index, index, strategy.getClass().getName(),
         tradingRecord.getCurrentPosition());
 
     boolean shouldOperate = strategy.shouldOperate(index, tradingRecord);
     if (shouldOperate) {
       tradingRecord.operate(index, barSeries.getBar(index).getClosePrice(),
           DecimalNum.valueOf(quantity));
-    }
+   }
     return tradingRecord;
   }
 

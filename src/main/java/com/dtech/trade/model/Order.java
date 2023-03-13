@@ -13,7 +13,7 @@ import java.time.ZonedDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-@Entity(name = "order")
+@Entity(name = "order1")
 public class Order implements RealTradeOrder {
     @Id
     @GeneratedValue
