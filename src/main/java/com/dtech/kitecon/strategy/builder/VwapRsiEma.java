@@ -8,6 +8,7 @@ import org.ta4j.core.BarSeries;
 import org.ta4j.core.BaseStrategy;
 import org.ta4j.core.Strategy;
 import org.ta4j.core.indicators.EMAIndicator;
+import org.ta4j.core.indicators.MACDIndicator;
 import org.ta4j.core.indicators.helpers.ClosePriceIndicator;
 import org.ta4j.core.indicators.helpers.OpenPriceIndicator;
 import org.ta4j.core.indicators.volume.VWAPIndicator;
@@ -22,6 +23,9 @@ public class VwapRsiEma extends BaseStrategyBuilder{
         EMAIndicator ema = new EMAIndicator(openPrice,9);
         EMAIndicator ema1 = new EMAIndicator(openPrice,5);
         VWAPIndicator vwap = new VWAPIndicator(series, 2);
+        MACDIndicator macdIndicatorSmall = new MACDIndicator(closePrice,13,21);
+        MACDIndicator macdIndicatorBig = new MACDIndicator(closePrice,34,144);
+
 
 
 //9480215566

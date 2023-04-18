@@ -27,8 +27,10 @@ public class MACDDiversionStrategy extends BaseStrategyBuilder {
   private static Strategy create3DaySmaUnderStrategy(BarSeries series) {
     ClosePriceIndicator closePrice = new ClosePriceIndicator(series);
 //silence
-    MACDIndicator macdIndicator = new MACDIndicator(closePrice,12,26);
-    Rule entryRule = new OverIndicatorRule(macdIndicator, 9)
+    MACDIndicator macdIndicatorSmall = new MACDIndicator(closePrice,13,21);
+    MACDIndicator macdIndicatorBig = new MACDIndicator(closePrice,34,144);
+
+    Rule entryRule = new OverIndicatorRule(macdIndicatorSmall, 9)
             .and((Rule) new EMAIndicator(closePrice, 9))
             .and((Rule) new EMAIndicator(closePrice, 5));
 
