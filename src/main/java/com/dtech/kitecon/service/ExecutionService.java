@@ -28,22 +28,23 @@ public class ExecutionService {
   private Map<String, ProductionHandler> runners = new HashMap<String, ProductionHandler>();
   private Map<TradeInfo, ProductionHandler> tradeHandlers = new HashMap<TradeInfo, ProductionHandler>();
 
-  public String startStrategy(String strategyName, String instrumentName, String direction) {
+  public String startStrategy(String type, String strategyName, String instrumentName, String direction,
+                               String quantity, String candle) {
     String uuid = UUID.randomUUID().toString();
     StrategyBuilder strategy = strategySet.getStrategy(strategyName);
     TradeInfo key = TradeInfo.builder().direction(direction).symbol(instrumentName).build();
     ProductionHandler handler = tradeHandlers.computeIfAbsent(key,
-        tradeInfo -> getProductionHandler(uuid, instrumentName, direction));
-    handler.startStrategy(instrumentName, strategy, direction);
+        tradeInfo -> getProductionHandler(uuid, instrumentName, direction, type));
+    handler.startStrategy(instrumentName, strategy, direction, quantity, candle);
     return uuid;
   }
 
   private ProductionHandler getProductionHandler(String uuid, String instrumentName,
-      String direction) {
+                        String direction, String type ) {
     ProductionHandler handler = new ProductionHandler(instrumentRepository, instrumentDataLoader,
         ordermanager, productionSeriesManager, strategyParametersRepository);
     runners.put(uuid, handler);
-    handler.initialise(instrumentName, direction);
+    handler.initialise(instrumentName, direction, type);
     return handler;
   }
 

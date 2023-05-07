@@ -14,11 +14,12 @@ public class ExecutionController {
   private final ExecutionService executionService;
 
 
-  @GetMapping("/start/{strategyName}/{instrument}/{direction}")
+  @GetMapping("/start/{type}/{strategyName}/{instrument}/{direction}/{quantity}/{candle}")
   @ResponseBody
-  public String startStrategy(@PathVariable String strategyName,
-      @PathVariable String instrument, @PathVariable String direction) throws InterruptedException {
-    return executionService.startStrategy(strategyName, instrument, direction);
+  public String startStrategy(@PathVariable String type,@PathVariable String strategyName,
+                              @PathVariable String instrument, @PathVariable String direction,
+                              @PathVariable String quantity,@PathVariable String candle) throws InterruptedException {
+    return executionService.startStrategy(type,strategyName, instrument, direction,quantity,candle);
   }
 
 

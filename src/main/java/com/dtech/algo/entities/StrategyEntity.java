@@ -17,7 +17,7 @@ public class StrategyEntity {
     private String barSeriesConfig;
 
     @Column
-    private String order;
+    private String order1;
 
     @JoinColumn
     private String barSeriesName;

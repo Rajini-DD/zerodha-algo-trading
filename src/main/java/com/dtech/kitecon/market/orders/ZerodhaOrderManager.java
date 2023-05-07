@@ -25,16 +25,17 @@ public class ZerodhaOrderManager implements OrderManager {
       throws OrderException {
     KiteConnect connect = kiteConnectConfig.getKiteConnect();
     OrderParams params = new OrderParams();
-    params.exchange = "NSE";
+    params.exchange = instrument.getExchange();
     params.tradingsymbol = instrument.getTradingsymbol();
     params.transactionType = orderType.toUpperCase();
     params.quantity = amount;
     params.price = price;
-    params.product = "MIS";
+    params.product = "NRML";
     params.orderType = "LIMIT";
     params.validity = "DAY";
     params.disclosedQuantity = amount;
     params.parentOrderId = UUID.randomUUID().toString();
+
     try {
       Order order = connect.placeOrder(params, "regular");
       return order.orderId;

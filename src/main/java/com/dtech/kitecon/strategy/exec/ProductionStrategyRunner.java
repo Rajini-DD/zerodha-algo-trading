@@ -2,6 +2,8 @@ package com.dtech.kitecon.strategy.exec;
 
 import com.dtech.kitecon.strategy.TradeDirection;
 import com.dtech.kitecon.strategy.TradingStrategy;
+
+import java.time.ZonedDateTime;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -22,10 +24,10 @@ public class ProductionStrategyRunner {
 
   private AtomicBoolean isTradeActive = new AtomicBoolean(false);
 
-  public void exec(BarSeries barSeries, TradingStrategy tradingStrategy) {
+  public void exec(BarSeries barSeries, TradingStrategy tradingStrategy, String quantity) {
     Strategy strategy = getStrategy(tradingStrategy);
     log.info("Running strategy for" + this.record);
-    productionSeriesManager.run(barSeries, strategy, this.record, 2);
+    productionSeriesManager.run(barSeries, strategy, this.record, Integer.getInteger(quantity));
   }
 
   private Strategy getStrategy(TradingStrategy tradingStrategy) {

@@ -25,7 +25,7 @@ public class KiteConnectConfig {
   private KiteConnect kiteConnect;
 
   public final void initialize(String requestToken) throws KiteException, IOException {
-    this.kiteConnect = new KiteConnect(apiKey);
+    this.kiteConnect = new KiteConnect(apiKey,true);
 
     //If you wish to enable debug logs send true in the constructor, this will log request and response.
     //KiteConnect kiteConnect = new KiteConnect("xxxxyyyyzzzz", true);
